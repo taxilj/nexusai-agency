@@ -37,7 +37,7 @@ export default function Hero() {
 
   return (
     <section
-      className="md:min-h-screen flex flex-col justify-start md:justify-center px-6 pt-24 pb-10 md:px-[60px] md:pt-[140px] md:pb-20 relative overflow-hidden"
+      className="min-h-screen flex flex-col justify-center px-6 pt-28 pb-12 md:px-[60px] md:pt-[140px] md:pb-20 relative overflow-hidden"
       style={{ background: "var(--bg)" }}
     >
       {/* Glows with pulse */}
@@ -48,7 +48,7 @@ export default function Hero() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute left-[10%] bottom-[10%] w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full pointer-events-none hidden md:block"
+        className="absolute left-[10%] bottom-[10%] w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full pointer-events-none opacity-0 md:opacity-100"
         style={{ background: "radial-gradient(circle, rgba(0,232,122,0.07) 0%, transparent 70%)" }}
         animate={prefersReduced ? {} : { scale: [1, 1.15, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
