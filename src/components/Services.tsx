@@ -1,6 +1,9 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { usePrefersReducedMotion } from "@/hooks/useAnimations";
 
 const services = [
   {
@@ -33,8 +36,61 @@ const services = [
   },
 ];
 
+function ServiceCard({ s, i, prefersReduced }: { s: typeof services[0]; i: number; prefersReduced: boolean }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="card-hover p-7 md:p-11 group"
+      initial={prefersReduced ? {} : { opacity: 0, y: 60 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+    >
+      <div className="font-mono text-[11px] tracking-[0.1em] mb-5 md:mb-7" style={{ color: "var(--green)" }}>
+        {s.num}
+      </div>
+      <motion.div
+        className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5 md:mb-6"
+        style={{ background: "var(--greensoft)" }}
+        whileHover={prefersReduced ? {} : { rotate: 10, scale: 1.2 }}
+        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+      >
+        {s.icon}
+      </motion.div>
+      <div className="font-syne font-bold text-[20px] md:text-[22px] text-white mb-3 md:mb-3.5">{s.name}</div>
+      <p className="text-[13px] md:text-sm leading-[1.75] mb-5 md:mb-7" style={{ color: "var(--muted)" }}>{s.desc}</p>
+      <div className="flex flex-wrap gap-2">
+        {s.tags.map((t) => (
+          <span
+            key={t}
+            className="font-mono text-[10px] px-3 py-1 rounded-full border"
+            style={{
+              color: "var(--green)",
+              background: "rgba(0,232,122,0.08)",
+              borderColor: "rgba(0,232,122,0.2)",
+            }}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+      <motion.span
+        className="absolute top-7 right-7 md:top-11 md:right-11 text-xl"
+        style={{ color: "var(--border)" }}
+        whileHover={prefersReduced ? {} : { x: 6, y: -6, color: "var(--green)" }}
+        transition={{ duration: 0.2 }}
+      >
+        ↗
+      </motion.span>
+    </motion.div>
+  );
+}
+
 export default function Services() {
   useScrollReveal();
+  const prefersReduced = usePrefersReducedMotion();
 
   return (
     <section id="services" className="px-6 py-16 md:px-[60px] md:py-[120px]" style={{ background: "var(--bg2)" }}>
@@ -54,43 +110,7 @@ export default function Services() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5">
         {services.map((s, i) => (
-          <div
-            key={s.name}
-            className={`card-hover p-7 md:p-11 reveal ${i === 1 || i === 3 ? "reveal-d1" : i === 3 ? "reveal-d2" : ""}`}
-          >
-            <div className="font-mono text-[11px] tracking-[0.1em] mb-5 md:mb-7" style={{ color: "var(--green)" }}>
-              {s.num}
-            </div>
-            <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5 md:mb-6 transition-transform duration-300 group-hover:scale-110"
-              style={{ background: "var(--greensoft)" }}
-            >
-              {s.icon}
-            </div>
-            <div className="font-syne font-bold text-[20px] md:text-[22px] text-white mb-3 md:mb-3.5">{s.name}</div>
-            <p className="text-[13px] md:text-sm leading-[1.75] mb-5 md:mb-7" style={{ color: "var(--muted)" }}>{s.desc}</p>
-            <div className="flex flex-wrap gap-2">
-              {s.tags.map((t) => (
-                <span
-                  key={t}
-                  className="font-mono text-[10px] px-3 py-1 rounded-full border"
-                  style={{
-                    color: "var(--green)",
-                    background: "rgba(0,232,122,0.08)",
-                    borderColor: "rgba(0,232,122,0.2)",
-                  }}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-            <span
-              className="absolute top-7 right-7 md:top-11 md:right-11 text-xl transition-all duration-300"
-              style={{ color: "var(--border)" }}
-            >
-              ↗
-            </span>
-          </div>
+          <ServiceCard key={s.name} s={s} i={i} prefersReduced={prefersReduced} />
         ))}
       </div>
     </section>

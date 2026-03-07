@@ -1,5 +1,8 @@
 "use client";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { usePrefersReducedMotion } from "@/hooks/useAnimations";
 
 const plans = [
   {
@@ -36,6 +39,9 @@ const plans = [
 
 export default function Pricing() {
   useScrollReveal();
+  const prefersReduced = usePrefersReducedMotion();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section id="pricing" className="px-6 py-16 md:px-[60px] md:py-[120px]" style={{ background: "var(--bg2)" }}>
@@ -47,16 +53,38 @@ export default function Pricing() {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-0.5 mt-10 md:mt-16">
+      <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-0.5 mt-10 md:mt-16">
         {plans.map((p, i) => (
-          <div
+          <motion.div
             key={p.name}
-            className={`p-7 md:p-11 border reveal reveal-d${i} transition-all duration-300 ${p.hot ? "order-first md:order-none" : ""} ${!p.hot ? "hover:-translate-y-1 hover:border-[rgba(0,232,122,0.4)]" : ""}`}
+            className={`p-7 md:p-11 border transition-colors duration-300 ${p.hot ? "order-first md:order-none" : ""} ${!p.hot ? "hover:border-[rgba(0,232,122,0.4)]" : ""}`}
             style={{
               background: p.hot ? "var(--green)" : "var(--card)",
               borderColor: p.hot ? "var(--green)" : "var(--border)",
             }}
+            initial={prefersReduced ? {} : { opacity: 0, y: 60, scale: p.hot ? 0.95 : 1 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{
+              duration: 0.5,
+              delay: i * 0.15,
+              ease: "easeOut",
+              ...(p.hot ? { type: "spring", stiffness: 200, damping: 12 } : {}),
+            }}
           >
+            {/* Featured card pulse glow */}
+            {p.hot && !prefersReduced && (
+              <motion.div
+                className="absolute inset-0 rounded-none pointer-events-none"
+                animate={{
+                  boxShadow: [
+                    "0 0 0px rgba(0,232,122,0)",
+                    "0 0 30px rgba(0,232,122,0.3)",
+                    "0 0 0px rgba(0,232,122,0)",
+                  ],
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              />
+            )}
             <div
               className="font-mono text-[10px] tracking-[0.1em] uppercase px-3 py-1 rounded-full inline-block mb-5 md:mb-6"
               style={{
@@ -86,18 +114,20 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
-            <a
+            <motion.a
               href="#contact"
-              className="block mt-7 md:mt-9 text-center py-3.5 rounded-full font-syne font-bold text-sm no-underline border transition-all duration-200 min-h-[44px] flex items-center justify-center"
+              className="block mt-7 md:mt-9 text-center py-3.5 rounded-full font-syne font-bold text-sm no-underline border min-h-[44px] flex items-center justify-center"
               style={
                 p.hot
                   ? { background: "#050d0a", color: "var(--green)", borderColor: "transparent" }
                   : { background: "transparent", color: "var(--text)", borderColor: "var(--border)" }
               }
+              whileHover={prefersReduced ? {} : { scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
             >
               {p.btnText}
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         ))}
       </div>
     </section>

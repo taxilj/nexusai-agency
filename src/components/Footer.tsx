@@ -1,69 +1,83 @@
 import Link from "next/link";
 
-const footerLinks = {
-  Services: [
-    { label: "WordPress Dev", href: "#services" },
-    { label: "AI Agents", href: "#services" },
-    { label: "AI Automation", href: "#services" },
-    { label: "Agentic AI", href: "#services" },
-  ],
-  Company: [
-    { label: "About Us", href: "#" },
-    { label: "Portfolio", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Careers", href: "#" },
-  ],
-  Contact: [
-    { label: "hello@agentryx.com", href: "mailto:hello@agentryx.com" },
-    { label: "WhatsApp", href: "https://wa.me/919104980549" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/takshil-prajapati-16bba5298" },
-    { label: "Instagram", href: "https://www.instagram.com/takshil52?igsh=ZTZwdW9tcXhqb2w1" },
-  ],
-};
+const serviceLinks = [
+  { label: "WordPress Dev", href: "#services" },
+  { label: "AI Agents", href: "#services" },
+  { label: "AI Automation", href: "#services" },
+  { label: "Agentic AI", href: "#services" },
+];
+
+const companyLinks = [
+  { label: "Services", href: "#services" },
+  { label: "Process", href: "#process" },
+  { label: "Why Us", href: "#whyus" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Contact", href: "#contact" },
+];
+
+const contactLinks = [
+  { label: "hello@agentryx.com", href: "mailto:hello@agentryx.com", external: true },
+  { label: "WhatsApp", href: "https://wa.me/919104980549", external: true },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/takshil-prajapati-16bba5298", external: true },
+  { label: "Instagram", href: "https://www.instagram.com/takshil52?igsh=ZTZwdW9tcXhqb2w1", external: true },
+];
 
 const socialLinks = [
   { label: "in", href: "https://www.linkedin.com/in/takshil-prajapati-16bba5298" },
   { label: "ig", href: "https://www.instagram.com/takshil52?igsh=ZTZwdW9tcXhqb2w1" },
 ];
 
+const footerColumns = [
+  { heading: "Services", links: serviceLinks },
+  { heading: "Company", links: companyLinks },
+  { heading: "Contact", links: contactLinks },
+];
+
 export default function Footer() {
   return (
     <footer className="border-t px-6 py-12 md:px-[60px] md:pt-20 md:pb-10" style={{ background: "var(--bg)", borderColor: "var(--border)" }}>
-      <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 md:gap-[60px] mb-10 md:mb-[60px]">
-        <div className="col-span-2 md:col-span-1">
+      {/* Top section: Logo + 3 link columns */}
+      <div className="mb-10 md:mb-[60px]">
+        {/* Logo & Tagline */}
+        <div className="mb-10 md:mb-0 md:float-left md:w-[280px] md:mr-[60px]">
           <Link href="/" className="flex items-center gap-2 font-syne font-extrabold text-[22px] text-white no-underline">
             <span className="w-2 h-2 rounded-full bg-[var(--green)] animate-pulse-dot inline-block" />
             Agentryx
           </Link>
-          <p className="text-[13px] leading-[1.75] mt-4 max-w-[300px] md:max-w-[260px]" style={{ color: "var(--muted)" }}>
+          <p className="text-[13px] leading-[1.75] mt-4 max-w-[280px]" style={{ color: "var(--muted)" }}>
             AI Automation &amp; WordPress Agency building intelligent systems that scale your business completely on autopilot.
           </p>
         </div>
 
-        {Object.entries(footerLinks).map(([heading, links]) => (
-          <div key={heading}>
-            <div className="font-syne font-bold text-[12px] md:text-[13px] text-white uppercase tracking-[0.08em] mb-4 md:mb-5">
-              {heading}
+        {/* Link columns */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-10">
+          {footerColumns.map((col) => (
+            <div key={col.heading}>
+              <div className="font-syne font-bold text-[12px] md:text-[13px] text-white uppercase tracking-[0.08em] mb-4 md:mb-5">
+                {col.heading}
+              </div>
+              <ul className="flex flex-col gap-3">
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    <a
+                      href={l.href}
+                      target={"external" in l && l.external ? "_blank" : undefined}
+                      rel={"external" in l && l.external ? "noopener noreferrer" : undefined}
+                      className="text-[13px] no-underline transition-colors duration-200 hover:text-[var(--green)] py-1 inline-block"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="flex flex-col gap-2.5 md:gap-3">
-              {links.map((l) => (
-                <li key={l.label}>
-                  <a
-                    href={l.href}
-                    target={l.href.startsWith("http") || l.href.startsWith("mailto:") ? "_blank" : undefined}
-                    rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-[12px] md:text-[13px] no-underline transition-colors duration-200 hover:text-[var(--green)] min-h-[44px] flex items-center"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    {l.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className="clear-both" />
       </div>
 
+      {/* Bottom bar */}
       <div className="border-t pt-6 md:pt-7 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center text-center md:text-left" style={{ borderColor: "var(--border)" }}>
         <div className="text-[11px] md:text-[12px]" style={{ color: "var(--muted)" }}>
           © 2025 Agentryx. All rights reserved.
