@@ -47,12 +47,6 @@ export default function Hero() {
         animate={prefersReduced ? {} : { scale: [1, 1.2, 1] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
-        className="absolute left-[10%] bottom-[10%] w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(0,232,122,0.07) 0%, transparent 70%)" }}
-        animate={prefersReduced ? {} : { scale: [1, 1.15, 1] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      />
 
       {/* Tag */}
       <motion.div
