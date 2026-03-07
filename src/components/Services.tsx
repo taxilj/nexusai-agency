@@ -7,28 +7,28 @@ const services = [
     num: "01 /",
     icon: "🌐",
     name: "WordPress Development",
-    desc: "Custom, blazing-fast WordPress websites with pixel-perfect design. From landing pages to full e-commerce & membership platforms.",
-    tags: ["Custom Themes", "WooCommerce", "Performance", "SEO Ready"],
+    desc: "We build fast, beautiful and conversion-focused WordPress websites. From business landing pages to full WooCommerce stores — pixel perfect on every device.",
+    tags: ["Custom Themes", "WooCommerce", "Page Speed", "SEO Ready"],
   },
   {
     num: "02 /",
     icon: "🤖",
     name: "AI Agents",
-    desc: "Deploy intelligent agents that handle tasks autonomously — customer support, lead qualification, data processing & more 24/7.",
+    desc: "We deploy smart AI agents that handle your repetitive tasks — customer support, lead qualification, follow-ups and data processing, all running 24/7.",
     tags: ["GPT-4o", "Claude AI", "Multi-Agent", "RAG Systems"],
   },
   {
     num: "03 /",
     icon: "⚡",
     name: "AI Automation",
-    desc: "End-to-end workflow automation using n8n, Make & Zapier. Connect your tools, eliminate repetitive work, scale operations 10x.",
-    tags: ["n8n", "Make.com", "CRM Integration", "Zapier"],
+    desc: "We connect your tools and automate your workflows using n8n, Make and Zapier — saving your team hours every single week without writing a single line of code.",
+    tags: ["n8n", "Make.com", "Zapier", "CRM Automation"],
   },
   {
     num: "04 /",
     icon: "🧠",
     name: "Agentic AI Systems",
-    desc: "Advanced autonomous AI pipelines that plan, reason & execute complex multi-step tasks — the next level of business intelligence.",
+    desc: "We build advanced multi-agent AI pipelines that can plan, think and execute complex tasks end-to-end — the most powerful form of business automation available today.",
     tags: ["LangChain", "CrewAI", "AutoGen", "Vector DB"],
   },
 ];
@@ -37,38 +37,38 @@ export default function Services() {
   useScrollReveal();
 
   return (
-    <section id="services" className="px-[60px] py-[120px]" style={{ background: "var(--bg2)" }}>
-      <div className="flex justify-between items-end mb-16">
+    <section id="services" className="px-6 py-16 md:px-[60px] md:py-[120px]" style={{ background: "var(--bg2)" }}>
+      <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-10 md:mb-16 gap-4">
         <div className="reveal">
           <div className="section-tag">What We Do</div>
           <h2 className="font-syne font-extrabold text-white leading-[1.1]"
-            style={{ fontSize: "clamp(36px, 4vw, 56px)" }}>
+            style={{ fontSize: "clamp(32px, 4vw, 56px)" }}>
             Our Core<br />
             <span className="text-outlined">Services</span>
           </h2>
         </div>
-        <p className="reveal reveal-d2 max-w-[340px] text-[15px] leading-[1.7]" style={{ color: "var(--muted)" }}>
-          From intelligent websites to fully autonomous AI agents — we engineer solutions that work while you sleep.
+        <p className="reveal reveal-d2 max-w-full md:max-w-[340px] text-[14px] md:text-[15px] leading-[1.7]" style={{ color: "var(--muted)" }}>
+          From high-converting WordPress websites to fully autonomous AI agents — we build solutions that generate results around the clock.
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-0.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5">
         {services.map((s, i) => (
           <div
             key={s.name}
-            className={`card-hover p-11 reveal ${i === 1 || i === 3 ? "reveal-d1" : i === 3 ? "reveal-d2" : ""}`}
+            className={`card-hover p-7 md:p-11 reveal ${i === 1 || i === 3 ? "reveal-d1" : i === 3 ? "reveal-d2" : ""}`}
           >
-            <div className="font-mono text-[11px] tracking-[0.1em] mb-7" style={{ color: "var(--green)" }}>
+            <div className="font-mono text-[11px] tracking-[0.1em] mb-5 md:mb-7" style={{ color: "var(--green)" }}>
               {s.num}
             </div>
             <div
-              className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-6 transition-transform duration-300 group-hover:scale-110"
+              className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-5 md:mb-6 transition-transform duration-300 group-hover:scale-110"
               style={{ background: "var(--greensoft)" }}
             >
               {s.icon}
             </div>
-            <div className="font-syne font-bold text-[22px] text-white mb-3.5">{s.name}</div>
-            <p className="text-sm leading-[1.75] mb-7" style={{ color: "var(--muted)" }}>{s.desc}</p>
+            <div className="font-syne font-bold text-[20px] md:text-[22px] text-white mb-3 md:mb-3.5">{s.name}</div>
+            <p className="text-[13px] md:text-sm leading-[1.75] mb-5 md:mb-7" style={{ color: "var(--muted)" }}>{s.desc}</p>
             <div className="flex flex-wrap gap-2">
               {s.tags.map((t) => (
                 <span
@@ -85,7 +85,7 @@ export default function Services() {
               ))}
             </div>
             <span
-              className="absolute top-11 right-11 text-xl transition-all duration-300"
+              className="absolute top-7 right-7 md:top-11 md:right-11 text-xl transition-all duration-300"
               style={{ color: "var(--border)" }}
             >
               ↗

@@ -149,3 +149,23 @@ body {
   border-color: rgba(0, 232, 122, 0.4);
   transform: translateY(-4px);
 }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+  .cursor,
+  .cursor-ring {
+    display: none;
+  }
+  .section-tag {
+    font-size: 10px;
+  }
+  .text-outlined {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  }
+  .card-hover:hover {
+    transform: none;
+  }
+}

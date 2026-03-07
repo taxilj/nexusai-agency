@@ -21,17 +21,20 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NexusAI — WordPress & AI Automation Agency",
+  title: "Agentryx — AI Automation & WordPress Agency",
   description:
-    "WordPress Development, AI Agents & Agentic AI Systems — crafted to scale your business on autopilot.",
+    "Agentryx builds WordPress websites, AI Agents and Agentic AI Automation systems that help businesses scale on complete autopilot.",
   keywords: [
-    "AI Agency",
+    "AI Agency India",
     "WordPress Development",
     "AI Agents",
     "AI Automation",
+    "n8n Automation",
     "Agentic AI",
-    "n8n",
+    "Business Automation",
+    "Chatbot Development",
   ],
+  icons: { icon: '/favicon.ico' },
 };
 
 export default function RootLayout({
