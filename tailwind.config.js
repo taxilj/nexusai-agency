@@ -18,9 +18,9 @@ module.exports = {
         muted: "#6b8a7a",
       },
       fontFamily: {
-        syne: ["var(--font-syne)", "sans-serif"],
-        dm: ["var(--font-dm)", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        syne: ["Syne", "sans-serif"],
+        dm: ["DM Sans", "sans-serif"],
+        mono: ["Space Mono", "monospace"],
       },
     },
   },
