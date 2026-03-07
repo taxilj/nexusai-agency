@@ -4,6 +4,7 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/hooks/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -18,9 +19,9 @@ module.exports = {
         muted: "#6b8a7a",
       },
       fontFamily: {
-        syne: ["Syne", "sans-serif"],
-        dm: ["DM Sans", "sans-serif"],
-        mono: ["Space Mono", "monospace"],
+        syne: ["var(--font-syne)", "sans-serif"],
+        dm: ["var(--font-dm)", "sans-serif"],
+        mono: ["var(--font-mono)", "monospace"],
       },
     },
   },
