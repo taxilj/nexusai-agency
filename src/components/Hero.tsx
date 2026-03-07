@@ -48,7 +48,7 @@ export default function Hero() {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute left-[10%] bottom-[10%] w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full pointer-events-none opacity-0 md:opacity-100"
+        className="absolute left-[10%] bottom-[10%] w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(0,232,122,0.07) 0%, transparent 70%)" }}
         animate={prefersReduced ? {} : { scale: [1, 1.15, 1] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
